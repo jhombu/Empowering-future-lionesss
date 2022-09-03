@@ -1,0 +1,549 @@
+/*
+ * Author       : snehakarthika.m1
+ * Generated on : 02-Sep-2022 12:42:11
+ * Version      : 1.0
+ */
+ application "Empowering Future Lioness"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+	section Register
+	{
+		icon = "shopping-cash-register"
+		default list Register_Report
+		{
+			displayName = "Register Report"
+   			hide = true
+			show all rows from Register    
+			(
+				Name 
+	 			(
+	      			displayformat = [first_name+""+prefix+""+last_name+""+suffix]
+	 			)
+				REmail
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Address 
+	 			(
+	      			displayformat = [address_line_1+""+address_line_2+""+district_city+""+state_province+""+postal_Code+""+country]
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				State
+				Password as "RPassword"
+				Confirm_Password as "Confirm Password"
+			)
+			options
+			(
+				icon = "business-laptop-71"
+	 		)
+			quickview
+			(
+				layout
+				(
+		 			type = -1
+					datablock1
+					(
+			 			layout type = -1
+						fields
+						(
+							Name
+							REmail
+							Phone_Number as "Phone"
+							Address
+							State
+							Password as "RPassword"
+							Confirm_Password as "Confirm Password"
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+							record
+							(
+								Edit   	   
+								Duplicate   	   
+								Delete   	   
+    						)
+    			)
+    			action
+    			(
+							on click
+							(
+								View Record   	   
+    						)
+							on right click
+							(
+								Edit   	   
+								Delete   	   
+								Duplicate   	   
+								View Record   	   
+    						)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+			 			layout type = -2
+						fields
+						(
+							Name
+							REmail
+							Phone_Number as "Phone"
+							Address
+							State
+							Password as "RPassword"
+							Confirm_Password as "Confirm Password"
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+		form Register
+		{
+			success message = "Data Added Successfully!"
+			field alignment = left
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Name
+			(
+    			type = name
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.", "Mrs.", "Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+    			description
+    			[
+    				type = tooltip
+    			 	message = "A Brave Start"
+    			]
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have unique REmail
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Password
+			(
+    			type = text
+				displayname = "RPassword"
+				maxchar = 10
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Confirm_Password
+			(
+    			type = text
+				displayname = "Confirm Password"
+				maxchar = 10
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Phone"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			State
+			(
+				type = picklist
+				maxchar = 100
+				values = {"TamilNadu", "Kerala", "AndhraPradesh", "Karntaka", "Assam", "Bihar", "Chhattisgarh", "Goa", "West Bengal"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Address
+			(
+    			type = address
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+	
+			customize
+			(
+				icon = "shopping-cash-register"
+			)
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	section Login
+	{
+		icon = "users-2-police"
+		default list Login_Report
+		{
+			displayName = "Login Report"
+   			hide = true
+			show all rows from Login    
+			(
+				Email
+				Password
+				Confirm_Password as "Confirm Password"
+			)
+			options
+			(
+				icon = "business-laptop-71"
+	 		)
+			quickview
+			(
+				layout
+				(
+		 			type = -1
+					datablock1
+					(
+			 			layout type = -1
+						fields
+						(
+							Email
+							Password
+							Confirm_Password as "Confirm Password"
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+							record
+							(
+								Edit   	   
+								Duplicate   	   
+								Delete   	   
+    						)
+    			)
+    			action
+    			(
+							on click
+							(
+								View Record   	   
+    						)
+							on right click
+							(
+								Edit   	   
+								Delete   	   
+								Duplicate   	   
+								View Record   	   
+    						)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+			 			layout type = -2
+						fields
+						(
+							Email
+							Password
+							Confirm_Password as "Confirm Password"
+						)
+					)
+				)
+
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+		form Login
+		{
+			success message = "Data Added Successfully!"
+			field alignment = left
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Email
+			(
+    			type = email
+				maxchar = 50
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Password
+			(
+    			type = text
+				maxchar = 10
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Confirm_Password
+			(
+    			type = text
+				displayname = "Confirm Password"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			customize
+			(
+				icon = "users-2-police"
+			)
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		properties
+		{
+			total entries
+			{
+				allowed count = 5
+			}
+		}
+		}
+	}
+	section Dashboard
+	{
+		icon = "design-photo-editor"
+				 page Home 
+	 	 { 
+ 	 	 displayname = "Home"
+
+ 	 	 icon = "design-window-paragraph" 
+	 	 Content="<zml    \n\t\t\tisPdfEnabled='false'\n\t\t\n\t\t\tisPrintEnabled='false'\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<panel \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#FF4C2F'\n\tsize = '36px'\n\tuppercase = 'false' \n\tunderline = 'false' \n\tbold = 'true' \n\titalic = 'false' \n\ttype = 'Text'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\t  \n\t  value = 'Let&apos;s Roar!'\n>\n<\/text>\n\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr><pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '33%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\n    action = 'OpenURL'\n\turl = 'https:\/\/timesofindia.indiatimes.com\/?from=mdr' \n\ttarget = 'new-window'\n\tcolor = '#FFFFFF'\n\tbgColor = '#FFFFFF'\n\twidth = '80px'\n\theight = '80px'\n\ttype = 'gallery'\n\tvalue = 'book.png'\n\tcornerRadius = '10px'\n\/>\n<\/pc>\n<\/pr>\n<\/pc><pc \n\t\tpadding = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '34%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\n    action = 'OpenURL'\n\turl = 'https:\/\/time.com\/100-women-of-the-year\/' \n\ttarget = 'new-window'\n\tcolor = '#FFFFFF'\n\tbgColor = '#FFFFFF'\n\twidth = '80px'\n\theight = '80px'\n\ttype = 'gallery'\n\tvalue = 'newspaper.png'\n\tcornerRadius = '10px'\n\/>\n<\/pc>\n<\/pr>\n<\/pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '33%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\n    action = 'OpenURL'\n\turl = 'https:\/\/blog.ipleaders.in\/eight-important-rights-every-indian-woman-know\/#:~:text=against%20them%20such%20as%20the,REDRESSAL)%20Act%2C%202013%3B%20the' \n\ttarget = 'new-window'\n\tcolor = '#FFFFFF'\n\tbgColor = '#FFFFFF'\n\twidth = '80px'\n\theight = '80px'\n\ttype = 'gallery'\n\tvalue = 'law.png'\n\tcornerRadius = '10px'\n\/>\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr><pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '17px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '36%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#000000'\n\tsize = '16px'\n\tuppercase = 'false' \n\tunderline = 'false' \n\tbold = 'false' \n\titalic = 'false' \n\ttype = 'Text'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\t  \n\t  value = 'News'\n>\n<\/text>\n\n<\/pc>\n<\/pr>\n<\/pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '17px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '29%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#000000'\n\tsize = '16px'\n\tuppercase = 'false' \n\tunderline = 'false' \n\tbold = 'false' \n\titalic = 'false' \n\ttype = 'Text'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\t  \n\t  value = 'Articles'\n>\n<\/text>\n\n<\/pc>\n<\/pr>\n<\/pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '17px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '35%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#000000'\n\tsize = '16px'\n\tuppercase = 'false' \n\tunderline = 'false' \n\tbold = 'false' \n\titalic = 'false' \n\ttype = 'Text'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\t  \n\t  value = 'Law'\n>\n<\/text>\n\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr><pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '47%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\n    action = 'OpenURL'\n\turl = 'https:\/\/greenliving.lovetoknow.com\/10_Ways_to_Conserve_Soil' \n\ttarget = 'new-window'\n\tcolor = '#FFFFFF'\n\tbgColor = '#FFFFFF'\n\twidth = '80px'\n\theight = '80px'\n\ttype = 'gallery'\n\tvalue = 'donation.png'\n\tcornerRadius = '10px'\n\/>\n<\/pc>\n<\/pr>\n<\/pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '17px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '0px'\n\tbgColor = 'transparent'\n\n\t\twidth = '53%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\n    action = 'OpenURL'\n\turl = 'https:\/\/www.womenwithaltitude.com.au\/members-area\/bravemagazine\/' \n\ttarget = 'new-window'\n\tcolor = '#FFFFFF'\n\tbgColor = '#FFFFFF'\n\twidth = '80px'\n\theight = '80px'\n\ttype = 'gallery'\n\tvalue = 'book-stack.png'\n\tcornerRadius = '10px'\n\/>\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr><pr \n\t\t\twidth='fill'\n\t\theight='42.6875px'\n>\n\t<pc \n\t\tpadding = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '50%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#000000'\n\tsize = '16px'\n\tuppercase = 'false' \n\tunderline = 'false' \n\tbold = 'false' \n\titalic = 'false' \n\ttype = 'Text'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\t  \n\t  value = 'Go Green'\n>\n<\/text>\n\n<\/pc>\n<\/pr>\n<\/pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '50%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#000000'\n\tsize = '16px'\n\tuppercase = 'false' \n\tunderline = 'false' \n\tbold = 'false' \n\titalic = 'false' \n\ttype = 'Text'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\t  \n\t  value = 'Magazine'\n>\n<\/text>\n\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr><pr \n\t\t\twidth='fill'\n\t\theight='118.65px'\n>\n\t<pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\n    action = 'OpenURL'\n\turl = 'https:\/\/www.google.com\/search?sxsrf=ALiCzsacr-v3jETA39sf9t2_ivccyRmErw%3A1662100234089&amp;amp;q=24-hour%20women%27s%20helpline%20number%20in%20tamilnadu&amp;amp;ved=2ahUKEwi3u6LwvfX5AhVPwjgGHVcSBHgQmoICKAB6BAgGEBA&amp;amp;biw=1536&amp;amp;bih=722&amp;amp;dpr=1.25' \n\ttarget = 'new-window'\n\tcolor = '#FFFFFF'\n\tbgColor = '#FFFFFF'\n\twidth = '80px'\n\theight = '80px'\n\ttype = 'gallery'\n\tvalue = 'siren.png'\n\tcornerRadius = '40px'\n\/>\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr><pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '17px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\tbgColor = 'transparent'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#000000'\n\tsize = '16px'\n\tuppercase = 'false' \n\tunderline = 'false' \n\tbold = 'false' \n\titalic = 'false' \n\ttype = 'Text'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\t  \n\t  value = 'Emergency'\n>\n<\/text>\n\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr>\n<\/panel>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>" 
+ 	 	}
+	}
+
+
+
+
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+	customize
+	{
+		
+		layout = "tab"
+		color = "black"
+		base theme = "professional"
+		new theme = 4
+		new theme color = 3
+		icons = true
+		icons style = outline
+	}
+
+
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"user","USER_CHOICE_DEFAULT_LANGUAGE":"default"}}
+}
+}
